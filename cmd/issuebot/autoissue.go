@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/google/go-github/v69/github"
+	"github.com/google/go-github/v71/github"
 )
 
 // issuebotStubLabel is a label attached to issues created by the bot so that
