@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/google/go-github/v45/github"
+	"github.com/google/go-github/v69/github"
 )
 
 func TestIsAutmationBotAuthor(t *testing.T) {
