@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/google/go-github/v45/github"
+	"github.com/google/go-github/v69/github"
 )
 
 // debounceInterval is how long after we've checked a PR that we are willing to

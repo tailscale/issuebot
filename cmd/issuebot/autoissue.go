@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/google/go-github/v45/github"
+	"github.com/google/go-github/v69/github"
 )
 
 // issuebotStubLabel is a label attached to issues created by the bot so that
@@ -87,9 +87,9 @@ func (p pullRequest) createStubIssue(ctx context.Context, cli *github.Client) (i
 	prAuthor := p.pr.GetUser().GetLogin()
 	labels := []string{issuebotStubLabel}
 	issue, _, err := cli.Issues.Create(ctx, owner, repoName, &github.IssueRequest{
-		Title:    github.String(fmt.Sprintf(issueTitleTemplate, prNumber)),
-		Assignee: github.String(prAuthor),
-		Body: github.String(fmt.Sprintf("TODO(@%s): Add details about PR #%d",
+		Title:    github.Ptr(fmt.Sprintf(issueTitleTemplate, prNumber)),
+		Assignee: github.Ptr(prAuthor),
+		Body: github.Ptr(fmt.Sprintf("TODO(@%s): Add details about PR #%d",
 			prAuthor, prNumber)),
 		Labels: &labels,
 	})
@@ -100,7 +100,7 @@ func (p pullRequest) createStubIssue(ctx context.Context, cli *github.Client) (i
 
 	// Add a comment to the PR thread indicating what we did.
 	if _, _, err := cli.Issues.CreateComment(ctx, owner, repoName, prNumber, &github.IssueComment{
-		Body: github.String(fmt.Sprintf(issueCommentTemplate, issueNumber)),
+		Body: github.Ptr(fmt.Sprintf(issueCommentTemplate, issueNumber)),
 	}); err != nil {
 		p.logf("error adding comment (continuing): %v", err)
 	}

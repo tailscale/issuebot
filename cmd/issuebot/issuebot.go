@@ -40,7 +40,7 @@ import (
 	"time"
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
-	"github.com/google/go-github/v45/github"
+	"github.com/google/go-github/v69/github"
 	"github.com/tailscale/setec/client/setec"
 	"tailscale.com/tsweb"
 )
@@ -201,14 +201,14 @@ func isAutomationBotAuthor(u *github.CommitAuthor) bool {
 func (p pullRequest) annotateCommitStatus(headSHA string, failed bool) {
 	now := time.Now()
 	status := &github.RepoStatus{
-		Context:   github.String("issuebot"),
-		UpdatedAt: &now,
+		Context:   github.Ptr("issuebot"),
+		UpdatedAt: &github.Timestamp{Time: now},
 	}
 	if failed {
-		status.State = github.String("failure")
-		status.Description = github.String(missingCommitExplanation)
+		status.State = github.Ptr("failure")
+		status.Description = github.Ptr(missingCommitExplanation)
 	} else {
-		status.State = github.String("success")
+		status.State = github.Ptr("success")
 	}
 
 	ctx := context.Background()
